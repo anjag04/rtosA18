@@ -1,5 +1,6 @@
 /*
-  Exercise 2: write a program to use bounded buffer. The program should define a buffer and can store characters. 
+  Exercise 2: write a program to use bounded buffer. 
+  The program should define a buffer and can store characters. 
   We input characters from command line, the program begin to print out all the input characters when the buffer is full. 
   An example code is given below
 */
@@ -33,7 +34,7 @@ int main()
     {
       if (((in + 1) % BUFFER_SIZE) == out)
       {
-        printf("\nFull.\n"); break;
+        printf("\nFull: %d\n", in); break;
       }//do nothing 
 
       next_produced.elem = text[in]; // assign the text to next_produced!
