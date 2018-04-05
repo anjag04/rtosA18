@@ -1,0 +1,3 @@
+gcc l1ex2.c -o l1ex2
+./l1ex2
+
