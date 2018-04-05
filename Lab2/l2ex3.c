@@ -4,42 +4,46 @@
   Both processes need to print out their results and exit normally
 */
 #include <stdio.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <sys/wait.h>
 
 #define POS_SUM_LIMIT 10000
 #define NEG_SUM_LIMIT -10000
 
 int sumOf (int sumToValue);
 
+
 int main ()
 {
-  printf ("sum of 1 to %d, = %d\n", POS_SUM_LIMIT, sumOf(POS_SUM_LIMIT));
-  printf ("sum of 1 to %d = %d\n", NEG_SUM_LIMIT, sumOf(NEG_SUM_LIMIT));
+  pid_t fork (void);
+  pid_t pid;
+
+  switch (pid = fork())
+  {
+    case -1:
+    perror ("fork:");
+    exit (-1);
+
+    case 0:
+//  do_child_things();
+    printf ("\nChild Process\n");
+    printf ("sum of 0 to %d, = %d\n", POS_SUM_LIMIT, sumOf(POS_SUM_LIMIT));
+    exit (0);
+    break;
+  
+    default:
+    printf("child pid = %d, parentpid = %d\n", (int) pid , (int) getpid ());
+//  do_parent_things();
+    printf ("\nParent Process\n");
+    printf ("sum of 0 to %d, = %d\n", NEG_SUM_LIMIT, sumOf(NEG_SUM_LIMIT));
+    wait (NULL);
+    break;
+  }
+
   return 0;
 }
-
-/*
-#include <sys/types.h>
-#include <unistd.h>
-
-pid_t fork(void)
-pid_t pid;
-switch(pid = fork())
-{
-  case -1:
-  perror ("fork:");
-  exit (-1);
-
-  case 0:
-//  do_child_things(); 
-  break;
-  
-  default:
-  printf("child pid = %d, parent’s=%d\n”, (int) pid , (int) getpid ());
-  
-//  do_parent_things(); /
-  break;
-}
-*/
 
 int sumOf (int sumToValue)
 {
