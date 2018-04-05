@@ -5,19 +5,16 @@
 */
 #include <stdio.h>
 
+#define POS_SUM_LIMIT 10000
+#define NEG_SUM_LIMIT -10000
+
+int sumOf (int sumToValue);
+
 int main ()
 {
-  
-  int 
-  int sum = 0;
-
-  for (int i = 0; i < 10000; i++)
-  {
-    sum += i;
-  }
-  //printf ("sum = %d\n", sum);
-
-  return sum;
+  printf ("sum of 1 to %d, = %d\n", POS_SUM_LIMIT, sumOf(POS_SUM_LIMIT));
+  printf ("sum of 1 to %d = %d\n", NEG_SUM_LIMIT, sumOf(NEG_SUM_LIMIT));
+  return 0;
 }
 
 /*
@@ -33,13 +30,34 @@ switch(pid = fork())
   exit (-1);
 
   case 0:
-/*  do_child_things(); */
+//  do_child_things(); 
   break;
   
   default:
   printf("child pid = %d, parent’s=%d\n”, (int) pid , (int) getpid ());
   
-/*  do_parent_things(); */
+//  do_parent_things(); /
   break;
 }
 */
+
+int sumOf (int sumToValue)
+{
+  int sumVal = sumToValue;
+  int sum = 0;
+  if (sumVal > 0)
+  {
+    for (int i = 0; i < sumVal; i++)
+    {
+      sum += i;
+    }
+  }
+  else
+  {
+    for (int i = 0; i > sumVal; i--)
+    {
+      sum += i;
+    }
+  }
+  return sum;
+}
