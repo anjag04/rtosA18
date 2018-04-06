@@ -4,10 +4,11 @@
 #include <sys/types.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <sys/wait.h> //NEEDED for wait (NULL)
 
 int main ()
 {
-  pid_tpid;
+  pid_t pid;
   /* fork a child process */
   pid = fork ();
   printf ("pidorder: pid = %d \n", pid); //to see thepidexecute order
@@ -30,6 +31,6 @@ int main ()
     wait (NULL);
     printf ("\nChildComplete and back to Parent\n");
   }
-  printf ("see whatpidis now: pid = %d \n", pid);//to see thepidexecute order
+  printf ("see what dpid is now: pid = %d \n", pid);//to see thepidexecute order
   return 0;
-}
+}d

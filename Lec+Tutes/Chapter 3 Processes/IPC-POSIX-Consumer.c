@@ -1,5 +1,6 @@
 /*
   === IPC  POSIX Consumer ===
+  - compile using gcc IPC-POSIX-Consumer.c -lrt -o Consumer
 */
 
 #include <sys/mman.h> //ADDED THIS TO FOR mmap ()
