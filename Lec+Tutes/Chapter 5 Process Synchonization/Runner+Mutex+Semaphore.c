@@ -1,5 +1,6 @@
 /*
 Ruuner + Mutex + Semaphore
+- compile using gcc -pthread Runner+Mutex+Semaphore.c -o rms
 */
 
 #include <stdlib.h>
