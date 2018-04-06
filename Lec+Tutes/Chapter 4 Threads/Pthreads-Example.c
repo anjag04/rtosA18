@@ -1,17 +1,19 @@
 /*
 Pthreads Example
+- compile using: gcc -pthread Pthreads-Example.c -o Pthreads
 */
 
 #include <pthread.h>
 #include <stdio.h>
+#include <stdlib.h> //NEED THIS FOR atoi
 
-int sum /* this data is shared by the thread(s) */
+int sum; /* this data is shared by the thread(s) */
 void *runner (void *param); /*threads call this function */
 
 int main (int argc, char *argv[])
 {
-	pthread_t tid /* the thread identifier */
-	pthread attr_t attr /* set of thead attributes */
+	pthread_t tid; /* the thread identifier */
+	pthread_attr_t attr; /* set of thead attributes */
 
 	if (argc !=2) // ARgument number should be 2
 	{
@@ -22,7 +24,7 @@ int main (int argc, char *argv[])
 	if (atoi (argv[1]) < 0)
 	{
 		fprintf (stderr, "%d must be >- 9 \n", atoi (argv[1]));
-		return -1
+		return -1;
 	}
 
 	/* get the default attributes */
@@ -38,11 +40,11 @@ int main (int argc, char *argv[])
 /* The thread will begin control in this function */
 void *runner (void *param)
 {
-	int i, upper = atoi (paam);
+	int i, upper = atoi (param);
 	sum = 0;
 
 	for (i = 1; i <= upper; i++)
 		sum += i;
 
-		pthread.exit (0);
+		pthread_exit (0);
 }
