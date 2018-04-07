@@ -6,6 +6,9 @@
   1) execute a program through its command line
   2) the program includes open a text file and read contents of the text file
   3) input the contents to a specific location the will display them.
+
+  Compile: gcc l1ex3 -o l1ex3
+  Use: ./l1ex3 file.txt
 */
 
 #include <stdio.h>

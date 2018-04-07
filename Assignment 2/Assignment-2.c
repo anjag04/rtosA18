@@ -5,20 +5,20 @@
 
 int main (int argc, char *argv[])
 {
-  time_t mytime;
-  struct tm *mytm;
+  time_t Mytime;
+  struct tm *Mytm;
 
-  mytime = time(NULL);
-  mytm = localtime(&mytime);
+  Mytime = time(NULL);
+  Mytm = localtime(&Mytime);
 
-  printf ("\ntimeStart: \n%s\n", ctime(&mytime));
-  int timeStart = mytm->tm_sec;
+  int timeStart = Mytm->tm_sec;
+  printf ("\ntimeStart: \n%s\n", ctime(&Mytime));
 
-  printf ("Hello World!\n");
+  for (int i = 0; i < 10; i++)
+    printf ("%d Hello World!\n", i);
 
-  int timeEnd = mytm->tm_sec;
-
-  printf ("\ntimeEnd: \n%s\n", ctime(&mytime));
+  int timeEnd = Mytm->tm_sec;
+  printf ("\ntimeEnd: \n%s\n", ctime(&Mytime));
 
   printf ("secondsTaken: %d\n seconds", timeEnd - timeStart);
 
@@ -27,5 +27,5 @@ int main (int argc, char *argv[])
 
 void startTime ()
 {
-
+    
 }
