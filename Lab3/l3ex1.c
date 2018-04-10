@@ -4,13 +4,16 @@ In thread 1, the program needs to sum up from 1 to 100, and outputs “thread on
 The two threads need to run mutually. In more details of each thread inside, firstly, the program waits for a semaphore, secondly, the program is locked to only run this thread, thirdly, do the calculation, fourthly, unlock the program; fifthly, send a semaphore to another thread.
 Also, the thread 2 runs firstly and send a semaphore to thread 1 when thread 2 finishes. Then, thread 1 begin to run until it finishes all its work. When the program finishes, it needs to release all the resource and exit correctly.
 A program framework is given, you need to fill the program and satisfy the requirement.
+Compile with: gcc l3ex1.c -o l3ex1 -pthread
+Run with: ./l3ex1 50
 */
 #include <stdlib.h>
 #include <stdio.h>
 #include <pthread.h>
 #include <semaphore.h>
 
-int sum;/*this data is shared by the threads*/
+int sumOf (int sumToValue);
+int Sum;/*this data is shared by the threads*/
 /* The mutex lock */
 pthread_mutex_t mutex;
 /* the semaphores */
@@ -18,72 +21,71 @@ sem_t one, two;
 pthread_t tid1,tid2;       //Thread ID
 pthread_attr_t attr; //Set of thread attributes
 
-void *runnerOne(void *param);/*threads call this function*/
-void *runnerTwo(void *param);/*threads call this function*/
+void *runnerOne (void *param);/*threads call this function*/
+void *runnerTwo (void *param);/*threads call this function*/
 void initializeData();
 
-int main(int argc, char*argv[])
+int main (int argc, char*argv[])
 {
  // pthread_t tid;/*the thread identifier*/
  // pthread_attr_t attr;/*set of thread attributes*/
 
-  if(argc!=2)
+  if (argc!=2)
   {
-	fprintf(stderr,"usage: a.out <integer value>\n");
-	return -1;
+	  fprintf (stderr,"usage: a.out <integer value>\n");
+	  return -1;
   }
-  if(atoi(argv[1])<0)
+  if (atoi (argv[1]) < 0)
   {
-	fprintf(stderr,"%d must be >=0\n",atoi(argv[1]));
-	return -1;
+	  fprintf (stderr,"%d must be > = 0\n", atoi (argv[1]));
+	  return -1;
   }
-  initializeData();
+  initializeData ();
 
   /*get the default attributes*/
-  pthread_attr_init(&attr);
+  pthread_attr_init (&attr);
   
   /*create the thread 1*/
-  pthread_create(&tid1,&attr,runnerOne,argv[1]);
+  pthread_create (&tid1,&attr, runnerOne, argv[1]);
   
-  printf("sum=%d\n",sum);
+  printf("Positive sum 0 to %d = %d \n", atoi (argv[1]), Sum);
 
   /*create the thread 2*/
   // add your program 
   
   /*send semaphore to thread 2 and begin the threads running*/
-  sem_post(&two);
+  sem_post (&two);
   /*wait for the thread to exit*/
-  // add your program 
+  // add your program
   
-  printf("sum=%d\n",sum);
-
+  printf("Negative sum 0 to -%d = %d \n", atoi (argv[1]), Sum);
 }
 
 /*The thread will begin control in this function*/
-void *runnerOne(void *param)
+void *runnerOne (void *param)
 {
   /* wait for the semaphore one */
-  sem_wait(&one);
+  sem_wait (&one);
   
   /* mutex lock the program */
-  pthread_mutex_lock(&mutex);
+  pthread_mutex_lock (&mutex);
   
   /* calculation */
-  int i,upper=atoi(param);
+  int i, upper = atoi (param);
   
-  for(i=1;i<=upper;i++)
-    sum+=i; 
+  for (i = 1; i <= upper; i++)
+    Sum += i; 
   
-  printf("thread one\n");
+  printf ("thread one\n");
   /* release the mutex lock */
-  pthread_mutex_unlock(&mutex); 
+  pthread_mutex_unlock (&mutex); 
   
   /* send semaphore to thread 2*/
-  sem_post(&two);
+  sem_post (&two);
 }
 
 /*The thread will begin control in this function*/
-void *runnerTwo(void *param)
+void *runnerTwo (void *param)
 {
   /* wait for the semaphore two */
   // add your program 
@@ -94,7 +96,7 @@ void *runnerTwo(void *param)
   /* calculation */
   // add your program   
   
-  printf("thread two\n");
+  printf ("thread two\n");
   /* release the mutex lock */
   // add your program 
   
@@ -102,19 +104,42 @@ void *runnerTwo(void *param)
   // add your program 
 }
 
-void initializeData() 
+void initializeData () 
 {
-   sum=0;
+   Sum = 0;
    
    /* Create the mutex lock */
-   pthread_mutex_init(&mutex, NULL);
+   pthread_mutex_init (&mutex, NULL);
 
    /* Create the one semaphore and initialize to 0 */
-   sem_init(&one, 0, 0);
+   sem_init (&one, 0, 0);
 
    /* Create the two semaphore and initialize to BUFFER_SIZE */
-   sem_init(&two, 0, 0);
+   sem_init (&two, 0, 0);
 
    /* Get the default attributes */
-   pthread_attr_init(&attr);
+   pthread_attr_init (&attr);
+}
+
+int sumOf (int sumToValue)
+{
+  int sumVal = sumToValue;
+  //int sum = 0;
+
+  if (sumVal > 0)
+  {
+    for (int i = 0; i < sumVal; i++)
+    {
+      printf ("i = %d", i);
+      Sum += i;
+    }
+  }
+  else
+  {
+    for (int i = 0; i > sumVal; i--)
+    {
+      Sum += i;
+    }
+  }
+  return Sum;
 }
