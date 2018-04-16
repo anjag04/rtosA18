@@ -48,7 +48,7 @@ int main (int argc, char*argv[])
   /*create the thread 1*/
   pthread_create (&tid1,&attr, runnerOne, argv[1]);
   
-  printf("Positive sum 0 to %d = %d \n", atoi (argv[1]), Sum);
+  printf("Positive sum 0 to %d = %d \n", atoi (argv[1]), sumOf(*argv[1]));
 
   /*create the thread 2*/
   // add your program 
@@ -58,7 +58,7 @@ int main (int argc, char*argv[])
   /*wait for the thread to exit*/
   // add your program
   
-  printf("Negative sum 0 to -%d = %d \n", atoi (argv[1]), Sum);
+  printf("Negative sum 0 to -%d = %d \n", atoi (argv[1]), sumOf(-(*argv[1])));
 }
 
 /*The thread will begin control in this function*/
@@ -72,7 +72,6 @@ void *runnerOne (void *param)
   
   /* calculation */
   int i, upper = atoi (param);
-  
   for (i = 1; i <= upper; i++)
     Sum += i; 
   
@@ -124,22 +123,22 @@ void initializeData ()
 int sumOf (int sumToValue)
 {
   int sumVal = sumToValue;
-  //int sum = 0;
+  int sum = 0;
 
   if (sumVal > 0)
   {
     for (int i = 0; i < sumVal; i++)
     {
-      printf ("i = %d", i);
-      Sum += i;
+//      printf ("i = %d", i);
+      sum += i;
     }
   }
   else
   {
     for (int i = 0; i > sumVal; i--)
     {
-      Sum += i;
+      sum += i;
     }
   }
-  return Sum;
+  return sum;
 }
