@@ -37,7 +37,7 @@ MAIN ()
 	Output content in shared memory to screen
 
 Strategy:
-V01
+V01 # $./rfps data.txt
 	ReadFile # data.txt ./l1ex3 data.txt OR HARDCODE?
 	PrintToScreen		./l1ex2
 
@@ -51,3 +51,6 @@ V03
 	SendThroughPipe
 	FilterContent
 	WriteToFile
+
+V04
+	Threads
