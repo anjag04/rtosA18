@@ -27,14 +27,15 @@ void initializeData();
 
 int main (int argc, char*argv[])
 {
- // pthread_t tid;/*the thread identifier*/
- // pthread_attr_t attr;/*set of thread attributes*/
+  pthread_t tid;/*the thread identifier*/
+  pthread_attr_t attr;/*set of thread attributes*/
 
   if (argc!=2)
   {
 	  fprintf (stderr,"usage: a.out <integer value>\n");
 	  return -1;
   }
+  
   if (atoi (argv[1]) < 0)
   {
 	  fprintf (stderr,"%d must be > = 0\n", atoi (argv[1]));
@@ -46,19 +47,31 @@ int main (int argc, char*argv[])
   pthread_attr_init (&attr);
   
   /*create the thread 1*/
-  pthread_create (&tid1,&attr, runnerOne, argv[1]);
+  pthread_create (&tid1, &attr, runnerOne, argv[1]);
   
+<<<<<<< HEAD
   printf("Positive sum 0 to %d = %d \n", atoi (argv[1]), sumOf(*argv[1]));
+=======
+  printf("\nThread 1 Created! Id = %d\n", tid1);
+>>>>>>> 2e537f5a051e30ad67080b5efda8b8a2a634d0dd
 
   /*create the thread 2*/
   // add your program 
+  pthread_create (&tid2, &attr, runnerTwo, argv[1]);
+
+  printf("\nThread 2 Created! Id = %d\n", tid2);
   
   /*send semaphore to thread 2 and begin the threads running*/
   sem_post (&two);
   /*wait for the thread to exit*/
   // add your program
+
+  /* wait for the semaphore one */
   
+<<<<<<< HEAD
   printf("Negative sum 0 to -%d = %d \n", atoi (argv[1]), sumOf(-(*argv[1])));
+=======
+>>>>>>> 2e537f5a051e30ad67080b5efda8b8a2a634d0dd
 }
 
 /*The thread will begin control in this function*/
@@ -88,19 +101,27 @@ void *runnerTwo (void *param)
 {
   /* wait for the semaphore two */
   // add your program 
+    sem_wait (&two);
   
   /* mutex lock the program */
   // add your program 
+  pthread_mutex_lock (&mutex); 
   
   /* calculation */
-  // add your program   
+  // add your program
+  printf ("\nTHREAD TWO!\n");
+  int i, upper = atoi (param);
   
-  printf ("thread two\n");
+  for (i = 1; i <= upper; i++)
+    Sum -= i; 
+
   /* release the mutex lock */
   // add your program 
+  pthread_mutex_unlock (&mutex); 
   
   /* send semaphore to thread 1*/
   // add your program 
+  sem_post (&one);
 }
 
 void initializeData () 
@@ -122,20 +143,29 @@ void initializeData ()
 
 int sumOf (int sumToValue)
 {
+<<<<<<< HEAD
   int sumVal = sumToValue;
+=======
+  int sumCalc = sumToValue;
+>>>>>>> 2e537f5a051e30ad67080b5efda8b8a2a634d0dd
   int sum = 0;
 
-  if (sumVal > 0)
+  if (sumCalc > 0)
   {
-    for (int i = 0; i < sumVal; i++)
+    for (int i = 0; i < sumCalc; i++)
     {
+<<<<<<< HEAD
 //      printf ("i = %d", i);
       sum += i;
+=======
+      printf ("i = %d\n", i);
+      Sum += i;
+>>>>>>> 2e537f5a051e30ad67080b5efda8b8a2a634d0dd
     }
   }
   else
   {
-    for (int i = 0; i > sumVal; i--)
+    for (int i = 0; i > sumCalc; i--)
     {
       sum += i;
     }
