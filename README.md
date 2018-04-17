@@ -46,9 +46,9 @@ V02
 	PrintToScreen
 	Write # src.txt
 
-V03
+V03 
 	ReadFile
-	SendThroughPipe
+	SendThroughPipe # ~./l3ex2~ ./firstPipe
 	FilterContent
 	WriteToFile
 
