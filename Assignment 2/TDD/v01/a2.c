@@ -1,5 +1,5 @@
 /*
- v01 TDD: Input file is passed into program and output file is created
+ v01 TDD: Blank output file is created
 */
 
 #include "writeFile.h"

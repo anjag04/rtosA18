@@ -114,6 +114,10 @@ Code Refactoring with custom, static header file
 /bin/sh: 1: /home/ankit/Documents/rtosA18/Assignment 2/TDD/v01/writeFile: Permission denied
 
 
+$ sudo chown -R <user-name> <directory-name>
 
+$ sudo chown -R ankit ~/Documents/rtosA18
 
+Success!
+Success!
 

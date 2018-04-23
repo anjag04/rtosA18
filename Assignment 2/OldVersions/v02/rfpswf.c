@@ -4,7 +4,7 @@
     Print to
     Screen
     Write to
-    Filw
+    File
 
     based on l1ex3 & https://www.youtube.com/watch?v=dP3N8g7h8gY:
     
