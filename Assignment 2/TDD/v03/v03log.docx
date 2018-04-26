@@ -1,0 +1,53 @@
+﻿V03 Goal Is To Read and Print Input and generate output as EXACT copy
+
+>>Format<<
+
+Test #
+Date
+Time
+Test for
+Error
+Fix
+Learning
+
+0
+2018-04-23
+18:38
+Compile new changes
+a2.c:14:3: warning: implicit declaration of function ‘help’ [-Wimplicit-function-declaration]
+void help ()
+{
+printf ("The program should have one input parameter,\n");
+printf ("the parameter is the document to be read.\n");
+printf ("Usage: exe text_file_path\n"); 
+printf ("Example: exe txt_file_path\n");
+}
+
+1
+2018-04-23
+18:40
+Setup Pipe
+
+a2.c:26:28: error: subscripted value is neither array nor pointer nor vector
+Changed to int main (int argc, char**argv)
+
+2
+2018-04-26
+16:14
+Setup Pipe
+
+a2.c:19:8: warning: implicit declaration of function ‘pipe’ [-Wimplicit-function-declaration]
+Need to run program using ./a2 data.txt -pthread
+
+2
+2018-04-26
+16:14
+Setup Pipe
+
+Gets stuck in forkedPipe()
+
+Need to run program using ./a2 data.txt -pthread
+
+DON’T USE L3EX2.C → Won’t exit the thread
+Shifted to pipedemo.c
+/pipedemo doesn’t stop either → Need to fix it to make it stop

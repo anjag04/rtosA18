@@ -4,6 +4,11 @@
 
 #include "a2.h"
 
+  Initialise ()
+  {
+    
+  }
+
 int main (int argc, char**argv)
 {	
 	if (checkInput (argc))
@@ -13,8 +18,14 @@ int main (int argc, char**argv)
   
   else
   {
+    // Initialise --> Start Timer, Create Pipe, Create Threads
+    Initialise ();
+    // Thread A --> read File, Write to Pipe
     readFile (argv);
+    // Thread B --> read Pipe, Pass to C
+    // Thread C --> read B, filter src, Write to File
 	  writeFile ();
   }
+  // Exit --> Stop Timer, Write to "shared"
 	return 0;
 }

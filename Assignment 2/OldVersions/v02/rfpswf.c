@@ -27,7 +27,7 @@
 #define CHARS_TO_READ 1
 #define BUFFER_SIZE 256
 #define LINES_TO_PRINT 15
-#define FILE_CHARS 25
+//#define FILE_CHARS 25
 void help ()
 {
   printf ("The program should have one input parameter,\n");
@@ -44,7 +44,7 @@ int main (int argc, char**argv)
   {
 // open a text file and print to screen
     int fd;
-    char buf[FILE_CHARS];
+    char buf[BUFFER_SIZE];
 
     fd = open ("WriteHere.txt", O_CREAT | O_WRONLY, 0600);
     if (fd == -1)
@@ -61,7 +61,7 @@ int main (int argc, char**argv)
       {
         fgets (strLine,BUFFER_SIZE,file); //read a line from the text file.
         printf ("%s", strLine);
-        write (fd, strLine, FILE_CHARS);
+        write (fd, strLine, BUFFER_SIZE);
       }
       printf ("\n");
 
