@@ -39,7 +39,7 @@ Setup Pipe
 a2.c:19:8: warning: implicit declaration of function ‘pipe’ [-Wimplicit-function-declaration]
 Need to run program using ./a2 data.txt -pthread
 
-2
+3
 2018-04-26
 16:14
 Setup Pipe
@@ -51,3 +51,112 @@ Need to run program using ./a2 data.txt -pthread
 DON’T USE L3EX2.C → Won’t exit the thread
 Shifted to pipedemo.c
 /pipedemo doesn’t stop either → Need to fix it to make it stop
+
+
+4
+2018-04-27
+23:11
+Setup Pipe
+
+Doesn’t run now…
+
+5
+2018-04-27
+23:15
+Setup Pipe
+
+Deleted Pipe Code
+
+>>Format<<
+
+Test #
+Date
+Time
+Test for
+Error
+Fix
+Learning
+
+6
+2018-04-27
+23:22
+Create Pipe
+
+a2.c:18:7: warning: implicit declaration of function ‘pipe’ [-Wimplicit-function-declaration]
+
+Added #include <unistd.h>
+
+7
+2018-04-27
+23:25
+Create Pipe
+
+Added #include <sys/types.h>
+
+a2.c:18:7: warning: implicit declaration of function ‘pipe’ [-Wimplicit-function-declaration]
+
+8
+2018-04-27
+23:26
+Create Pipe
+
+Added #include <string.h>
+
+a2.c:18:7: warning: implicit declaration of function ‘pipe’ [-Wimplicit-function-declaration]
+
+9
+2018-04-27
+23:30
+Create Pipe
+
+Added #include <unistd.h>
+
+a2.c:18:7: warning: implicit declaration of function ‘pipe’ [-Wimplicit-function-declaration]
+
+10
+2018-04-27
+23:30
+Refactor createPipe
+
+Added #include <unistd.h>
+
+a2.c:18:7: warning: implicit declaration of function ‘pipe’ [-Wimplicit-function-declaration]
+
+11
+2018-04-27
+23:40
+Create Pipe Refactored
+
+12
+2018-04-27
+23:42
+writeToPipe
+
+a2.c:19:34: warning: implicit declaration of function ‘strlen’ [-Wimplicit-function-declaration]
+
+Added #include <srting.h>
+
+13
+2018-04-27
+23:50
+refactor
+
+
+Added #include <srting.h>
+
+
+14
+2018-04-27
+23:53
+Compiling readFromPipe
+
+a2.c:19:34: warning: implicit declaration of function ‘strlen’ [-Wimplicit-function-declaration]
+
+No output, what happens in writeToPipe?
+
+14
+2018-04-27
+23:59
+refactor
+
+Doesn’t get to reading pipe → Double check values with pip_demo

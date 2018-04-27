@@ -1,5 +1,5 @@
 /*
-	Prototypes for destination file functions
+	Preprocessor and Prototypes for destination file functions
 */
 
 #include <fcntl.h>
@@ -68,6 +68,7 @@ void readFile (char ** argv)
 	//if File exists, store in buffer
   if (file != NULL) 
   {
+		printf ("==File Contents==:\n\n");
     for (int i = 0; i < LINES_TO_PRINT; i++)
     {
     //read one line from the text file.
@@ -78,5 +79,42 @@ void readFile (char ** argv)
 }
 
 /*
-	Libraries for Pipe Function
+	Preprocessor for Pipe Function
 */
+	#include <unistd.h>
+	#include <string.h>
+	#define MESSLENGTH 80
+/*
+	Pipe Function Prototypes
+*/
+int createPipe (int * fd)
+{
+//	int pipe (fd[2]);
+}
+
+void writePipe (int * fd)
+{
+  char writeBuf [] = "This has been through the pipe!\n";
+  /* close the 'read' end of pipe */
+	close (fd [0]);
+  write (fd [1], writeBuf, strlen (writeBuf));
+	/* close the 'write' end after writing */
+	close (fd[1]);
+
+	exit (0);
+}
+
+void readPipe (int n, int * fd)
+{
+  char readBuf [MESSLENGTH];
+	/* ensure 'write' end of pipe is closed */
+  close (fd[1]);
+  n = read (fd [0], readBuf, MESSLENGTH);
+  /* put null char at the end of string */
+	readBuf [n] = '\0';
+  printf ("%s", readBuf);
+	/* close the 'write' end after writing */
+	close (fd[0]);
+
+	exit (0);
+}

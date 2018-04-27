@@ -5,65 +5,17 @@
 
 #include "a2.h"
 
-#define MESSLENGTH 80
-
-char pourIntoPipe[] = "This has been through the pipe!\n";
-char collectFromPipe[MESSLENGTH];
-
-int forkedPipe (void)
-{
-  int n, fd[2];
-  pid_t pid;
-
-  printf ("Reached forkedPipe");
-
-  /* open pipe */
-
-  if ( pipe (fd) < 0 )
-    perror ("pipe error");
-    
-
-  if ( (pid = fork()) < 0 )
-    perror ("fork error");
-    
-  else if ( pid > 0 )
-
-  /* parent will do the writing this time */
-  {
-	/*write the content of purIntoPipe variable into pipe */
-    // your program
-    write (fd, pourIntoPipe, MESSLENGTH);
-	  
-	/* wait child process to finish*/
-	  // your program
-    wait (NULL);
-	  
-  }  
-    
-  else 
-  {
-  /* child will do the reading. */
-	  
-	/*read content from pipe*/
-    // your program
-    read (fd[0], collectFromPipe, MESSLENGTH);
-	  
-	/*print the content to the monitor*/
-    printf ("%s", collectFromPipe);
-  }
-    
-  return 0;
-}
+/* Global Pipe For Thread Communication */
+int Pipe = 0;
+char writeBuf[] = "This has been through the pipe!\n";
+char readBuf[MESSLENGTH];
 
 int main (int argc, char**argv)
 {	
-  forkedPipe ();
-/*	if (forkedPipe() != 0)
-  {
-    printf ("\nPipe or Fork Error!\n");
-    return 1;
-  }
-  else*/ if (checkInput (argc))
+  /* Array of two ints for file descriptors */
+  int n, fd[2];
+
+  if (checkInput (argc))
   {
     printf ("\nNo input file to read!\n");
     return 1;
@@ -71,8 +23,23 @@ int main (int argc, char**argv)
   
   else
   {
-    readFile (argv);
-	  writeFile ();
+    Pipe = pipe (fd);
+    //createPipe (fd);
+    if (Pipe < 0)
+    {
+  /* Using perror () for the first time */
+      perror ("pipe error");
+      exit (1);
+    }
+   
+    else 
+    {
+      readFile (argv);
+      writePipe (fd);
+      readPipe (n, fd);
+	    writeFile ();
+    }
   }
+
 	return 0;
 }
