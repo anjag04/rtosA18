@@ -40,9 +40,10 @@ int main (int argc, char**argv)
   	{
 			//read one line from the text file.
 			printf ("==Pipe INPUT==\n\n");
+		//Check what is being written to pipe
 			fgets (pipeWrite,BUFFER_SIZE,file);
-      printf ("%s", pipeWrite); //Check what is being written to pipe
-		// write buffer contents to pipe	
+      printf ("%s", pipeWrite);
+		// write buffer contents to pipe
 			write (fd [1], pipeWrite, strlen (pipeWrite));
 		// close pipe input
 			close (fd[1]);
@@ -50,15 +51,18 @@ int main (int argc, char**argv)
 		}
 
 		/* Thread B */
+		// read buffer contents to buffer
 			read (fd[0],pipeRead, BUFFER_SIZE);
+		//Check what is being read from pipe
 			printf ("==Pipe OUTPUT==\n\n");
-			printf ("%s", pipeWrite); //Check what is being written to pipe
-
+			printf ("%s", pipeWrite);
 			// Signal Thread C
 
 		/* Thread C */
-			
 
+		const char *fileWrite = pipeWrite;
+
+		writeFile (fileWrite);
 
 		// Signal Thread A
 
