@@ -60,7 +60,7 @@ int main (int argc, char**argv)
 
 		/* Thread C */
 
-		const char *fileWrite = pipeWrite;
+		char *fileWrite = pipeWrite;
 
 		writeFile (fileWrite);
 

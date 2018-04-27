@@ -39,7 +39,7 @@ int checkInput (int argc)
 	Thread A
 */
 #include <stdio.h>
-#define BUFFER_SIZE 256
+#define fileNameBuf_SIZE 256
 #include <string.h>
 
 /*
@@ -52,13 +52,13 @@ void writeFile (char * fileWrite)
 	int fd;
 // createUniqueFileName
 	time_t rawtime;
-	char buffer [255];
+	char fileNameBuf [255];
 
 	time (&rawtime);
 	/* SAVEFILE NAME GETS CHANGED HERE */
-	const char *file =  sprintf (buffer, "GenFile-%s.txt",ctime (&rawtime));
+	int file = sprintf (fileNameBuf, "GenFile-%s.txt",ctime (&rawtime));
 
-	FILE *f = fopen (buffer, "w");
+	FILE *f = fopen (fileNameBuf, "w");
 
 	if (fd == -1)
 	{
