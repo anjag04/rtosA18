@@ -49,7 +49,7 @@ int checkInput (int argc)
 void writeFile (char * fileWrite)
 {
 // open a text file and print to screen
-	int fd;
+	int fd;d
 // createUniqueFileName
 	time_t rawtime;
 	char fileNameBuf [255];

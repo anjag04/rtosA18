@@ -7,6 +7,7 @@
 
 #include "ass.h"
 #include "ThreadA.h"
+#include "Initialise.h"
 
 int main (int argc, char**argv)
 {
@@ -19,13 +20,19 @@ int main (int argc, char**argv)
 
 	else
 	{
-	/* Create Pipe */
-		int fd[2];
-		pipe (fd);
+
+	/* An array of two ints for the file descriptors. */
+  int   n, myPipeFD[2];
+  pid_t pid;
+  
+	/* Create Pipe and Fork*/
+  createPipeFork (myPipeFD, pid);
+
 	
 	/* Create Signal Variables */
 
 	/* Create Threads */
+
 		
 	/* Thread A */
 
@@ -35,27 +42,26 @@ int main (int argc, char**argv)
   	char 	pipeWrite[BUFFER_SIZE];
 		char	pipeRead[BUFFER_SIZE];
   	char ch;
-	//if File exists, store in buffer
+		// if File exists, store in buffer
   	if (file != NULL) 
   	{
-			//read one line from the text file.
-			printf ("==Pipe INPUT==\n\n");
-		//Check what is being written to pipe
+		// read one line from the text file.
 			fgets (pipeWrite,BUFFER_SIZE,file);
-      printf ("%s", pipeWrite);
+		// Check what is being written to pipe
+      printf ("pipeWrite: %s\n", pipeWrite);
 		// write buffer contents to pipe
-			write (fd [1], pipeWrite, strlen (pipeWrite));
+			write (myPipeFD [1], pipeWrite, strlen (pipeWrite));
 		// close pipe input
-			close (fd[1]);
+			close (myPipeFD[1]);
 		// signal Thread B
 		}
 
 		/* Thread B */
 		// read buffer contents to buffer
-			read (fd[0],pipeRead, BUFFER_SIZE);
+			read (myPipeFD[0], pipeRead, BUFFER_SIZE);
+		
 		//Check what is being read from pipe
-			printf ("==Pipe OUTPUT==\n\n");
-			printf ("%s", pipeWrite);
+			printf ("pipeRead: %s\n", pipeRead);
 			// Signal Thread C
 
 		/* Thread C */
