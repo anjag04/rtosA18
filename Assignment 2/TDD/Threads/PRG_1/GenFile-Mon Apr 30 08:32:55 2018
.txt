@@ -1,0 +1,3 @@
+ply
+format asciiþcomment VCGLþelement vertþproperty floþproperty floþproperty floþelement faceþproperty lisþend_header
+þ
