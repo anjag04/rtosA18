@@ -22,7 +22,7 @@
 #include <time.h>
 #include <stdlib.h>
 #include <string.h>
-#define BUFFER_SIZE 50
+#define BUFFER_SIZE 200
 #define NUM_LINES 15 /* Total Lines 15 */ /* End Header on Line 10*/ /* DETERMINE THIS BY READING FILE */
 
 /*!
@@ -136,24 +136,15 @@ int main(int argc, char * * argv) {
         {
           //read one line from the text file.
           fgets(pipeWrite, BUFFER_SIZE, file);
-          //Check what is being written to pipe
-          printf("pipeWrite %%s = %s\n", pipeWrite);
-          // printf("pipeWrite %%d = %d\n", pipeWrite);
-          // printf("pipeWrite %%c = %c\n", pipeWrite);
-          // write buffer contents to pipe
           write(mypipefd[1], pipeWrite, strlen(pipeWrite));
 
-          /* Thread B  */
+          /* Thread B Read from pipe to pipeRead */
 
-          /* Thread C */
+          /* Thread C Copy to Buffer and Filter out Header */
 
           size_t fwSize = sizeof(fileWrite)/ sizeof (int);
           size_t etSize = sizeof(endText)/ sizeof (int);
           strncpy(fileWrite, pipeWrite, etSize);
-
-          // printf("endText %%d = %d\n", endText);
-          // printf("sizeOf (endText) %%d = %d\n", etSize);
-          // printf("sizeOf (fileWrite) %%d = %d\n", fwSize);
 
           // Raise a flag if end detected
             ret = strstr(fileWrite, needle);
@@ -161,16 +152,22 @@ int main(int argc, char * * argv) {
           // Write to file if flag raised
             if (ret != 0 || headerFlag != -1)
             {
-              writeFile(fileWrite, mypipefd, f);
-              headerFlag++;
+              headerFlag++; 
             }
 
-            if (ret != 0)
+            else if (ret != 0)
             {
               printf ("Found end_header at %d\n", i);
             }
-            printf ("ret = %d\n", ret);
-            printf ("headerFlag = %d\n", headerFlag);
+            /* This is what gets Printed To The Output File */
+            if (headerFlag > 0)
+            {
+              writeFile(fileWrite, mypipefd, f);
+              printf ("%s\n",fileWrite);
+            }
+              
+            // printf ("ret = %d\n", ret);
+            // printf ("headerFlag = %d\n", headerFlag);
 
           int endMatch = strncmp (endText, fileWrite, etSize);
         }
