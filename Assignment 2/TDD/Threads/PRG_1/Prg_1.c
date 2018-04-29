@@ -22,7 +22,7 @@
 #include <stdlib.h>
 #include <string.h>
 #define BUFFER_SIZE 256
-#define NUM_LINES 16
+#define NUM_LINES 15 /* DETERMINE THIS BY READING FILE */
 
 /*!
  * @brief Checks if file to read is specified
@@ -38,7 +38,7 @@ int checkInput (int argc)
     printf ("The program should have one input parameter,\n");
     printf ("the parameter is the document to be read.\n");
     printf ("Usage: exe text_file_path\n");
-    printf ("Example: exe txt_file_path\n");
+    printf ("Example: ./ txt_file\n");
 
     return 1;
   } 
@@ -53,34 +53,24 @@ int checkInput (int argc)
  * 
  * @param argc the inputs to the program
 */
-void writeFile (char * fileWrite) 
+void writeFile (char * fileWrite, int * mypipefd, FILE * f) 
 {
-  int mypipefd;
-  time_t rawtime;
-  char buffer [255];
-  time (&rawtime);
-
-	// createUniqueFileName /* SAVEFILE NAME GETS CHANGED HERE */
-  const char file = sprintf (buffer, "GenFile-%s.txt", ctime ( &rawtime));
-
-// open a text file and print to screen
-	FILE * f = fopen (buffer, "w");
-
-  if (mypipefd == -1) 
+  if (* mypipefd == -1) 
 	{
     printf ("Failed to create and open the file.\n");
     exit (1);
   } 
 	else 
 	{
-    fprintf (f, fileWrite, file);
+	// Write contents to file
+    fprintf (f, fileWrite, f);
   }
 }
 
 /*!
  * @brief Read one line of text from a file
  * 
- * @param argc the inputs to the program
+ * @param argv the inputs to the program
 */
 void readLine (char ** argv) 
 {
@@ -92,7 +82,7 @@ void readLine (char ** argv)
   if (file != NULL) 
 	{
     printf ("==Line Read==:\n");
-    //read one line from the text file.
+  //read one line from the text file.
     fgets (lineRead, BUFFER_SIZE, file);
     printf ("%s", lineRead);
   }
@@ -109,7 +99,7 @@ void writePipe ()
 
 int main (int argc, char * * argv) 
 {
-  /* Check for input text file */
+	/* Check for input text file */
   if (checkInput(argc)) 
 	{
     printf ("\nNo input file to read!\n");
@@ -117,9 +107,22 @@ int main (int argc, char * * argv)
   } 
 	else 
 	{
-    /* Create Pipe */
-    int mypipefd [2];
-    pipe (mypipefd);
+	/* Initialise Functions */
+//		int mypipefd;
+		time_t rawtime;
+		char buffer [255];
+		time (&rawtime);
+
+	/* Create Pipe */
+		int mypipefd [2];
+		pipe (mypipefd);
+
+
+		// create file with Unique eName /* SAVEFILE NAME GETS CHANGED HERE  ==IGNORE DYNAMIC FILE WARNINGS FOR THIS==*/
+		const char *  namedFile = sprintf (buffer, "GenFile-%s.txt", ctime ( &rawtime));
+
+	// open a text file and print to screen
+		FILE * f = fopen (buffer, "w");
 
     /* Create Signal Variables */
 
@@ -156,14 +159,14 @@ int main (int argc, char * * argv)
         printf ("\n==Pipe OUTPUT==\n");
         printf ("%s", pipeRead);
         // Signal Thread C
-      }
+      
 
       /* Thread C */
 
       /*const*/ char * fileWrite = pipeWrite;
 
-      writeFile (fileWrite);
-
+      writeFile (fileWrite, mypipefd, f);
+			}
       // Signal Thread A
     }
   }
