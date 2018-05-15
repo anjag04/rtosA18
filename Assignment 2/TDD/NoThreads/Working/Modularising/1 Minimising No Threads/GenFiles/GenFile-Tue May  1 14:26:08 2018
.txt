@@ -1,3 +1,0 @@
-format ascii 1.0
-format ascii 1.0
-format ascii 1.0

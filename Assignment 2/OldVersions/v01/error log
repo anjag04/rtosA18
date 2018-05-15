@@ -1,2 +1,0 @@
-Segmentation fault:
-A segmentation fault is when your program attempts to access memory it has either not been assigned by the operating system, or is otherwise not allowed to access.

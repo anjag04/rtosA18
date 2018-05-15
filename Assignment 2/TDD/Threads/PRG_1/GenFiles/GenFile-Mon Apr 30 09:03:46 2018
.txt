@@ -1,2 +1,0 @@
-format asciiücomment VCGLüelement vertüproperty floüproperty floüproperty floüelement faceüproperty lisüend_header
-ü-0.962323 1.ü-0.411401 1.ü-0.947731 1.ü-0.912823 1.ü-0.89709 1.1ü

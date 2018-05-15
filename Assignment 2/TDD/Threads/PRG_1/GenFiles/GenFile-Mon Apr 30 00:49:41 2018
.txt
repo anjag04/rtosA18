@@ -1,6 +1,0 @@
-property float y
-property float x
-element vertex 5
-comment VCGLIB generated
-format ascii 1.0
-ply

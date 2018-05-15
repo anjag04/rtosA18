@@ -1,3 +1,0 @@
-ply
-format asciiýcomment VCGLýelement vertýproperty floýproperty floýproperty floýelement faceýproperty lisýend_header
-ý
