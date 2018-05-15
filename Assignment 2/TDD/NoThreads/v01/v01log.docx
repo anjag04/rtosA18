@@ -1,0 +1,127 @@
+﻿V01 Goal is to generate an empty file
+
+>>FORMAT<<
+Test #
+Date
+Time
+Test for
+Error
+Fix
+Learning
+
+0
+2018-04-23
+14:56
+Compile simple main returning 0
+a2.c:5:20: error: expected ‘;’, ‘,’ or ‘)’ before ‘char’
+
+Added Comma between arguments
+
+1
+2018-04-23
+15:02
+Check compilation
+a2.c:7:2: error: ‘fd’ undeclared (first use in this function)
+
+Declared int fd;
+
+2
+2018-04-23
+15:04
+Check compilation
+a2.c:9:7: warning: implicit declaration of function ‘open’ [-Wimplicit-function-declaration]
+
+Added library #include <fcntl.h>
+
+
+3
+2018-04-23
+15:06
+Check compilation
+a2.c:14:3: warning: implicit declaration of function ‘printf’ [-Wimplicit-function-declaration]
+
+Added library #include <stdio.h>
+
+
+4
+2018-04-23
+15:09
+Check compilation
+a2.c:16:5: warning: implicit declaration of function ‘exit’ [-Wimplicit-function-declaration]
+
+Added #include <stdlib.h>
+
+Save code before running!
+5
+2018-04-23
+15:13
+Refactor Code to clean up main
+a2.c:11:2: warning: implicit declaration of function ‘openFile’ [-Wimplicit-function-declaration]
+
+Declared Prototype void openFile (void);
+
+
+6
+2018-04-23
+15:25
+Unique Filenames using system time
+a2.c:28:2: warning: implicit declaration of function ‘time’ [-Wimplicit-function-declaration]
+
+Added library #include <time.h>
+
+
+7
+2018-04-23
+15:25
+Unique Filenames using system time
+(.text+0x20): undefined reference to `main'
+
+Different Error?
+
+8
+2018-04-23
+15:27
+Unique Filenames using system time
+a2.c:32:19: warning: passing argument 2 of ‘open’ makes integer from pointer without a cast [-Wint-conversion]
+
+
+
+9
+2018-04-23
+15:30
+Unique Filenames using system time
+File created but no document format
+Added .txt in string
+
+10
+2018-04-23
+15:34
+Code Refactoring with custom, static header file
+a2.c:9:23: fatal error: writeFile.h: No such file or directory
+
+#include "writeFile.h"
+
+Header file needs to be in quotes
+
+11
+2018-04-23
+15:34
+Code Refactoring with custom, static header file
+writeFile.h:10:2: error: ‘time_t’ was not declared in this scope
+
+Moved ALL Libraries to header file
+
+12
+2018-04-23
+15:38
+Code Refactoring with custom, static header file
+/bin/sh: 1: /home/ankit/Documents/rtosA18/Assignment 2/TDD/v01/writeFile: Permission denied
+
+
+$ sudo chown -R <user-name> <directory-name>
+
+$ sudo chown -R ankit ~/Documents/rtosA18
+
+Success!
+Success!
+

@@ -1,0 +1,69 @@
+﻿V02 Goal Is To Read and Print Input while still generating empty output
+
+>>Format<<
+Test #
+Date
+Time
+Test for
+Error
+Fix
+Learning
+
+0
+2018-04-23
+15:57
+Compile new changes
+a2.c:14:3: warning: implicit declaration of function ‘help’ [-Wimplicit-function-declaration]
+void help ()
+{
+printf ("The program should have one input parameter,\n");
+printf ("the parameter is the document to be read.\n");
+printf ("Usage: exe text_file_path\n"); 
+printf ("Example: exe txt_file_path\n");
+}
+
+1
+2018-04-23
+15:59
+Compile new changes
+a2.c:26:28: error: subscripted value is neither array nor pointer nor vector
+Changed to int main (int argc, char**argv)
+
+2
+2018-04-23
+16:00
+Compile new changes
+a2.c:27:16: error: ‘BUFFER_SIZE’ undeclared (first use in this function)
+Added #define BUFFER_SIZE 256
+
+3
+2018-04-23
+16:03
+Compile new changes
+a2.c:34:25: error: ‘LINES_TO_PRINT’ undeclared (first use in this function)
+Added #define LINES_TO_PRINT 14
+
+4
+2018-04-23
+16:05
+Compile new changes- 
+Compiled, printing input file to screen and creating output file
+
+5
+2018-04-23
+16:09
+Refactor Code
+
+6
+2018-04-23
+16:42
+Refactor Code
+a2.c:14:3: error: expected expression before ‘FILE’
+s
+
+
+2018-04-23
+17:20
+Write buffer to output file
+a2.h:77:4: warning: implicit declaration of function ‘write’ [-Wimplicit-function-declaration]
+
